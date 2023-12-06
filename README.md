@@ -13,12 +13,15 @@ Place where we cook for DP Group assessment
 ## Getting Started
 
 ### Clone the Repository
+
 ```bash
 git clone https://github.com/yourusername/your-repository.git
 cd your-repository
 
-Backend Setup
-Import Project in IDE
+## Backend Setup
+### Import Project in IDE
 
     Open your preferred IDE (IntelliJ, Eclipse, etc.).
     Import the Maven project located in the backend directory.
+    
+## Run the Backend
