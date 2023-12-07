@@ -25,6 +25,16 @@ cd your-repository
     Open your preferred IDE (IntelliJ, Eclipse, etc.).
     Import the Maven project located in the backend directory.
 
+## Build
+```bash
+    .\mvnw.cmd clean install
+```
+
+## Run
+```bash
+    .\mvnw.cmd spring-boot:run
+```
+
 ## Run the Backend
 ```bash
 cd backend
