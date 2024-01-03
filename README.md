@@ -69,8 +69,8 @@ cd backend
 
 ### Dependencies
 
-    Spring Boot: Version XYZ
-    Bootstrap: Version XYZ
+    Spring Boot
+    Bootstrap
 
 ### Troubleshooting
 

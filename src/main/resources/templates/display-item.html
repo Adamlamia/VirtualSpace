@@ -1,0 +1,29 @@
+<!-- display-item.html -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Displayed Item - Underwater Domain</title>
+    <style>
+        body {
+            background-image: url("/images/background.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: #ffffff;
+        }
+        .container {
+            margin-top: 50px;
+        }
+    </style>
+  </head>
+  <body>
+    <h1>Displayed Item</h1>
+    <div th:if="${position != null}">
+      <p th:text="'Item displayed at position: ' + ${position}"></p>
+    </div>
+    <img th:src="${imagePath}" alt="Displayed Item" />
+    <br />
+    <a th:href="@{/api/virtual-space/choose-category}">Choose Another Item</a>
+  </body>
+</html>
