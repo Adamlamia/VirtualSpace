@@ -5,33 +5,3 @@ body {
 .container {
     margin-top: 50px;
 }
-
-/* styles.css */
-.underwater-space {
-    display: grid;
-    grid-template-columns: repeat(9, 1fr);
-    grid-template-rows: repeat(9, 1fr);
-    gap: 5px;
-}
-
-.row {
-    display: flex;
-}
-
-.column {
-    flex: 1;
-}
-
-.grid-cell {
-    border: 1px solid #ffffff; /* Add border for visualization */
-    height: 40px;
-    width: 40px;
-    overflow: hidden;
-}
-
-.grid-cell img {
-    max-width: 100%;
-    max-height: 100%;
-    display: block;
-    margin: auto;
-}

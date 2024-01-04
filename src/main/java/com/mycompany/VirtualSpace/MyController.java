@@ -1,4 +1,3 @@
-// MyController.java
 package com.mycompany.VirtualSpace;
 
 import org.springframework.stereotype.Controller;
@@ -7,8 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,38 +16,78 @@ import java.util.Map;
 @RequestMapping("/api/virtual-space")
 public class MyController {
 
-    private static final int GRID_SIZE = 9; // Adjust this based on your grid size
-
-    @GetMapping("/choose-category")
-    public String showCategoryPage(Model model) {
-        Map<String, List<String>> categories = CategoryManager.getCategories();
-        model.addAttribute("categories", categories);
-        model.addAttribute("gridSize", GRID_SIZE);
-        return "choose-category";
+    @GetMapping("/home")
+    public String home(Model model) {
+        model.addAttribute("imageForm", new ImageForm());
+        return "index";
     }
 
-    @PostMapping("/display-item")
-    public String displayItem(String category, String item, int row, int column, Model model) {
-        // Calculate the grid position
-        int position = row * GRID_SIZE + column;
+    @PostMapping("/process")
+    public String processForm(ImageForm imageForm, Model model) {
+        // Logic to determine the selected image path based on category and subcategory
+        String selectedImagePath = determineImagePath(imageForm.getCategory(), imageForm.getSubcategory());
 
-        // Construct the path based on the category and item
-        String imagePath = constructImagePath(category, item);
+        // Add selected image path to the model
+        model.addAttribute("selectedImagePath", selectedImagePath);
 
-        // Pass the grid position and image path to the view
-        model.addAttribute("position", position);
-        model.addAttribute("imagePath", imagePath);
-        return "display-item";
+        // Populate the model with subcategories based on the selected category
+        List<String> subcategories = getSubcategories(imageForm.getCategory());
+        model.addAttribute("subcategories", subcategories);
+
+        return "index";
     }
 
-    private String constructImagePath(String category, String item) {
-        String categoryPath = category.toLowerCase();
-        String itemPath = item.toLowerCase() + ".png";
+    private String determineImagePath(String category, String subcategory) {
 
-        // Use Paths to construct the path safely
-        Path imagePath = Paths.get("/images", categoryPath, itemPath);
+        // Define a mapping between categories, subcategories, and image paths
+        Map<String, Map<String, String>> imagePathMapping = new HashMap<>();
 
-        // Convert the Path to a String
-        return imagePath.toString();
+        // Animal category
+        Map<String, String> animalImages = new HashMap<>();
+        animalImages.put("Clown Fish", "/images/animal/clownfish.jpg");
+        animalImages.put("Dori", "/images/animal/dori.jpg");
+        // Add other animal subcategories and their image paths
+        imagePathMapping.put("animal", animalImages);
+
+        // Plant category
+        Map<String, String> plantImages = new HashMap<>();
+        plantImages.put("Seaweed", "/images/plant/seaweed.jpg");
+        plantImages.put("Coral", "/images/plant/coral.jpg");
+        // Add other plant subcategories and their image paths
+        imagePathMapping.put("plant", plantImages);
+
+        // Wreckage category
+        Map<String, String> wreckageImages = new HashMap<>();
+        wreckageImages.put("Treasure", "/images/wreckage/treasure.jpg");
+        wreckageImages.put("Shipwreck", "/images/wreckage/shipwreck.jpg");
+        // Add other wreckage subcategories and their image paths
+        imagePathMapping.put("wreckage", wreckageImages);
+
+        // Retrieve the image path based on the provided category and subcategory
+        return imagePathMapping.getOrDefault(category, Collections.emptyMap())
+                .getOrDefault(subcategory, "/images/default.jpg");
     }
+
+    private List<String> getSubcategories(String category) {
+    
+        // Define a mapping between categories and their subcategories
+        Map<String, List<String>> subcategoriesMapping = new HashMap<>();
+        
+        // Animal category
+        subcategoriesMapping.put("animal", Arrays.asList("Clown Fish", "Dori", "Shark", "Squid", "Octopus", "Tuna"));
+    
+        // Plant category
+        subcategoriesMapping.put("plant", Arrays.asList("Seaweed", "Coral", "Kelp"));
+    
+        // Wreckage category
+        subcategoriesMapping.put("wreckage", Arrays.asList("Treasure", "Shipwreck", "Submarine", "Cargo Box"));
+    
+        // Debugging output
+        List<String> subcategories = subcategoriesMapping.getOrDefault(category, Collections.emptyList());
+        System.out.println("Subcategories for category " + category + ": " + subcategories);
+    
+        return subcategories;
+    }
+    
+
 }
