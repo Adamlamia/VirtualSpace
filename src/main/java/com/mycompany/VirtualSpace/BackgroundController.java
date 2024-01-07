@@ -1,3 +1,4 @@
+// BackgroundController.java
 package com.mycompany.VirtualSpace;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -7,25 +8,31 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class BackgroundController {
 
+    private SoundController soundController = new SoundController();
+
     @PostMapping("/change-background")
     public String changeBackground(@RequestParam String option) {
-        // Define the paths for the three background options
-        String imagePath = "/images/";
+        BackgroundDecorator decorator;
+
         switch (option) {
             case "over-the-sea":
-                imagePath += "over_the_sea.jpg";
+                decorator = new OverTheSeaDecorator();
+                soundController.addObserver(new ShipBellObserver());
                 break;
             case "in-the-sea":
-                imagePath += "in_the_sea.jpg";
+                decorator = new InTheSeaDecorator();
+                soundController.addObserver(new SeaWaveObserver());
                 break;
             case "bottom-of-the-sea":
-                imagePath += "bottom_of_the_sea.jpg";
+                decorator = new BottomOfTheSeaDecorator();
+                soundController.addObserver(new SeaBirdObserver());
                 break;
             default:
-                imagePath += "default.jpg";
+                decorator = new DefaultDecorator();
         }
 
-        // Return the updated background image path
-        return imagePath;
+        // Uncomment the following lines and return decorator.getImagePath();
+        soundController.notifyObservers();
+        return decorator.getImagePath();
     }
 }
