@@ -5,3 +5,8 @@ body {
 .container {
     margin-top: 50px;
 }
+
+.canvas {
+    position: relative;
+}
+
