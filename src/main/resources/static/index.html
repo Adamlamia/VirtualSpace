@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/styles.css" />
     <style>
       body {
-        background-image: url("/images/default-background.jpg"); /* Set a default or placeholder image */
+        background-image: url("/images/default.jpg"); /* Set a default or placeholder image */
         background-size: cover;
         background-repeat: no-repeat;
         color: #ffffff; /* Set text color to be visible on the background */
@@ -36,11 +36,7 @@
       </div>
       <div>
         <!-- Audio Control Buttons -->
-        <button onclick="playAudio()">Play Audio</button>
-        <button onclick="pauseAudio()">Pause Audio</button>
-      </div>
-      <!-- Image Display -->
-      <img th:src="...">fdf</img>
+        
     </div>
     <!-- Bootstrap JS and Popper.js (required for some Bootstrap components) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -63,35 +59,6 @@
           success: function (response) {
             // Update the background image on success
             $("body").css("background-image", "url(" + response + ")");
-          },
-        });
-
-        // Uncomment the following line and update the paths accordingly
-        $("img").attr("src", "...");
-
-        // Uncomment the following lines to control audio
-        playAudio();
-      }
-
-      // Uncomment the following functions for audio control
-      function playAudio() {
-        // Send an AJAX request to the server to play audio
-        $.ajax({
-          type: "POST",
-          url: "/play-audio",
-          success: function (response) {
-            // Handle success
-          },
-        });
-      }
-
-      function pauseAudio() {
-        // Send an AJAX request to the server to pause audio
-        $.ajax({
-          type: "POST",
-          url: "/pause-audio",
-          success: function (response) {
-            // Handle success
           },
         });
       }
