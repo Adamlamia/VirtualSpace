@@ -36,7 +36,8 @@
       </div>
       <div>
         <!-- Audio Control Buttons -->
-        
+        <audio controls style="display:none"></audio>
+
     </div>
     <!-- Bootstrap JS and Popper.js (required for some Bootstrap components) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -59,9 +60,38 @@
           success: function (response) {
             // Update the background image on success
             $("body").css("background-image", "url(" + response + ")");
+    
+            // Map background options to corresponding audio files
+            const audioFiles = {
+              "over-the-sea": ["Sea_Waves.wav", "Sea_Bird.wav", "Ship_Bell.mp3"],
+              "in-the-sea": ["in_the_sea.wav"],
+              "bottom-of-the-sea": ["bottom_of_the_sea.wav"],
+            };
+    
+            // Get the corresponding audio files for the selected option
+            const selectedAudio = audioFiles[option];
+    
+            // Play the audio files
+            playAudio(selectedAudio);
           },
         });
       }
+    
+      // Function to play audio
+      function playAudio(audioFiles) {
+        // Stop any currently playing audio
+        $("audio").each(function () {
+          this.pause();
+          this.currentTime = 0;
+        });
+    
+        // Play the selected audio files
+        audioFiles.forEach(function (audioFile) {
+          const audio = new Audio("/sounds/" + audioFile);
+          audio.play();
+        });
+      }
     </script>
+    
   </body>
 </html>
