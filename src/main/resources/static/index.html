@@ -34,10 +34,24 @@
           Bottom of the Sea
         </button>
       </div>
+      <!-- Audio Control Buttons -->
       <div>
-        <!-- Audio Control Buttons -->
-        <audio controls style="display:none"></audio>
-
+        <audio controls style="display: none"></audio>
+      </div>
+      <!-- Images of environment-->
+      <div class="page-images">
+        <img class="CargoShip" src="/images/Cargo_Ship.png" alt="Cargo Ship" />
+        <img class="FlyingBird" src="/images/flying_bird.png" alt="Flying Bird" />
+        <img class="Turtle" src="/images/turtle.png" alt="Turtle" />
+        <img class="Diver" src="/images/diver.png" alt="Diver" />
+        <img class="Shark" src="/images/shark.png" alt="Shark" />
+        <img class="SwordFish" src="/images/swordfish.png" alt="Swordfish" />
+        <img class="Coral" src="/images/coral.png" alt="Coral" />
+        <img class="Crab" src="/images/crab.png" alt="Crab" />
+        <img class="Octopus" src="/images/octopus.png" alt="Octopus" />
+        <img class="Seagrass" src="/images/seagrass.png" alt="Seagrass" />
+        <img class="SunkenShip" src="/images/sunkenship.png" alt="Sunken Ship" />
+      </div>
     </div>
     <!-- Bootstrap JS and Popper.js (required for some Bootstrap components) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -60,23 +74,63 @@
           success: function (response) {
             // Update the background image on success
             $("body").css("background-image", "url(" + response + ")");
-    
+
             // Map background options to corresponding audio files
             const audioFiles = {
-              "over-the-sea": ["Sea_Waves.wav", "Sea_Bird.wav", "Ship_Bell.mp3"],
+              "over-the-sea": [
+                "Sea_Waves.wav",
+                "Sea_Bird.wav",
+                "Ship_Bell.mp3",
+              ],
               "in-the-sea": ["in_the_sea.wav"],
               "bottom-of-the-sea": ["bottom_of_the_sea.wav"],
             };
-    
+
             // Get the corresponding audio files for the selected option
             const selectedAudio = audioFiles[option];
-    
+
             // Play the audio files
             playAudio(selectedAudio);
+
+            // Map background options to corresponding image files
+            const imageFiles = {
+              "over-the-sea": ["Cargo_Ship.png", "flying_bird.png"],
+              "in-the-sea": [
+                "turtle.png",
+                "diver.png",
+                "shark.png",
+                "swordfish.png",
+              ],
+              "bottom-of-the-sea": [
+                "coral.png",
+                "crab.png",
+                "octopus.png",
+                "seagrass.png",
+                "sunkenship.png",
+              ],
+            };
+
+            // Get the corresponding image files for the selected option
+            const selectedImages = imageFiles[option];
+
+            // Display the selected images
+            displayImages(selectedImages);
           },
         });
       }
-    
+
+      // Function to display images
+      function displayImages(imageFiles) {
+        // Hide all images initially
+        $(".page-images img").hide();
+
+        // Display the selected images
+        imageFiles.forEach(function (imageFile) {
+          // Show the corresponding image
+          $(`.page-images img[src*="${imageFile}"]`).show();
+        });
+      }
+
       // Function to play audio
       function playAudio(audioFiles) {
         // Stop any currently playing audio
@@ -84,7 +138,7 @@
           this.pause();
           this.currentTime = 0;
         });
-    
+
         // Play the selected audio files
         audioFiles.forEach(function (audioFile) {
           const audio = new Audio("/sounds/" + audioFile);
@@ -92,6 +146,5 @@
         });
       }
     </script>
-    
   </body>
 </html>
