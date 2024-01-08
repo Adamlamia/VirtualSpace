@@ -12,10 +12,10 @@
     <link rel="stylesheet" href="/styles.css" />
     <style>
       body {
-        background-image: url("/images/default.jpg"); /* Set a default or placeholder image */
+        background-image: url("/images/default.jpg"); 
         background-size: cover;
         background-repeat: no-repeat;
-        color: #ffffff; /* Set text color to be visible on the background */
+        color: #ffffff; 
       }
       .container {
         margin-top: 50px;
@@ -26,7 +26,6 @@
   <body>
     <div class="container">
       <h1>Domain Expansion: Not That Deep</h1>
-      <!-- Add these buttons inside the container div -->
       <div>
         <button onclick="changeBackground('over-the-sea')">Over the Sea</button>
         <button onclick="changeBackground('in-the-sea')">In the Sea</button>
@@ -53,7 +52,7 @@
         <img class="SunkenShip" src="/images/sunkenship.png" alt="Sunken Ship" />
       </div>
     </div>
-    <!-- Bootstrap JS and Popper.js (required for some Bootstrap components) -->
+    <!-- Bootstrap JS and Popper.js -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
     <script
@@ -61,21 +60,17 @@
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
       crossorigin="anonymous"
     ></script>
-    <!-- Add this script at the end of the body -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <!-- function to change background -->
     <script>
       function changeBackground(option) {
-        // Send an AJAX request to the server with the selected option
         $.ajax({
           type: "POST",
           url: "/change-background",
           data: { option: option },
           success: function (response) {
-            // Update the background image on success
             $("body").css("background-image", "url(" + response + ")");
 
-            // Map background options to corresponding audio files
+            // Map background options
             const audioFiles = {
               "over-the-sea": [
                 "Sea_Waves.wav",
@@ -86,13 +81,11 @@
               "bottom-of-the-sea": ["bottom_of_the_sea.wav"],
             };
 
-            // Get the corresponding audio files for the selected option
             const selectedAudio = audioFiles[option];
 
-            // Play the audio files
             playAudio(selectedAudio);
 
-            // Map background options to corresponding image files
+            // Map background options 
             const imageFiles = {
               "over-the-sea": ["Cargo_Ship.png", "flying_bird.png"],
               "in-the-sea": [
@@ -110,36 +103,29 @@
               ],
             };
 
-            // Get the corresponding image files for the selected option
             const selectedImages = imageFiles[option];
 
-            // Display the selected images
             displayImages(selectedImages);
           },
         });
       }
 
-      // Function to display images
       function displayImages(imageFiles) {
-        // Hide all images initially
+        // Hide images initially
         $(".page-images img").hide();
 
         // Display the selected images
         imageFiles.forEach(function (imageFile) {
-          // Show the corresponding image
           $(`.page-images img[src*="${imageFile}"]`).show();
         });
       }
 
-      // Function to play audio
       function playAudio(audioFiles) {
-        // Stop any currently playing audio
         $("audio").each(function () {
           this.pause();
           this.currentTime = 0;
         });
 
-        // Play the selected audio files
         audioFiles.forEach(function (audioFile) {
           const audio = new Audio("/sounds/" + audioFile);
           audio.play();

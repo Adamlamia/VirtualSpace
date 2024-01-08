@@ -1,4 +1,3 @@
-// BackgroundController.java
 package com.mycompany.VirtualSpace;
 
 import org.springframework.web.bind.annotation.PostMapping;
