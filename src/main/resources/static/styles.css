@@ -1,12 +1,95 @@
 body {
-    background-color: #f8f9fa;
+  background-color: #f8f9fa;
 }
 
 .container {
-    margin-top: 50px;
+  margin-top: 50px;
 }
 
 .canvas {
-    position: relative;
+  position: relative;
 }
 
+.CargoShip {
+    position: fixed;
+    width: 300px;
+    height: auto;
+    left: 120px; 
+    top: 420px; 
+}
+
+.FlyingBird{
+    position: absolute;
+    width: 100px;
+    height: auto;
+    right: 400px; 
+    top: 200px; 
+}
+
+.Turtle{
+    position: absolute;
+    width: 200px;
+    height: auto;
+    right: 280px; 
+    top: 400px;
+}
+
+.Diver{
+    position: absolute;
+    width: 400px;
+    height: auto;
+    right: 350px; 
+    top: 400px;
+}
+
+.Shark{
+    position: fixed;
+    width: 100px;
+    height: auto;
+    left: 120px; 
+    top: 420px; 
+}
+
+.SwordFish{
+    position: absolute;
+    width: 500px;
+    height: auto;
+    left: 120px; 
+    top: 420px;
+}
+
+.Coral{
+    position: absolute;
+    width: 400px;
+    height: auto;
+    right: 0px; 
+    bottom: 0px;
+}
+.Crab{
+    position: absolute;
+    width: 450px;
+    height: auto;
+    right: 500px; 
+    bottom: 200px;
+}
+.Octopus{
+    position: absolute;
+    width: 300px;
+    height: auto;
+    left: 400px; 
+    bottom: 100px;
+}
+.Seagrass{
+    position: absolute;
+    width: 500px;
+    height: auto;
+    left: 400px; 
+    bottom: 70px;
+}
+.SunkenShip{
+    position: absolute;
+    width: 270px;
+    height: auto;
+    left: 300px; 
+    top: 200px;
+}
